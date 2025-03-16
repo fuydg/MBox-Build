@@ -40,7 +40,7 @@ jobs:
           find ~ -name "*.apk" -exec mv {} $GITHUB_WORKSPACE/apk/ \;
 
       - name: Upload App to Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: com.github.tvbox.osc
           path: $GITHUB_WORKSPACE/apk/*
