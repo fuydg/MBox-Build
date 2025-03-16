@@ -17,6 +17,7 @@ jobs:
 
       - name: Run DIY script
         run: |
+          cd TVBoxOS-Mobile
           chmod +x diy-J.sh
           ./diy-J.sh
 
@@ -28,14 +29,16 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          num=$(find $GITHUB_WORKSPACE -name gradlew | awk -F"/" '{print NF-1}')
-          DIR=$(find $GITHUB_WORKSPACE -name gradlew | cut -d \/ -f$num)
+          cd TVBoxOS-Mobile
+          num=$(find . -name gradlew | awk -F"/" '{print NF-1}')
+          DIR=$(find . -name gradlew | cut -d \/ -f$num)
           cd $DIR
           chmod +x gradlew
           ./gradlew assembleRelease --build-cache --parallel --daemon --warning-mode all
 
       - name: Prepare App
         run: |
+          cd TVBoxOS-Mobile
           mkdir -p $GITHUB_WORKSPACE/apk/
           find ~ -name "*.apk" -exec mv {} $GITHUB_WORKSPACE/apk/ \;
 
